@@ -13,14 +13,14 @@
                 <img src="assets/logo.svg">
             </div>
             <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#destinations">Destinations</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#partner">Partner</a></li>
+                <a href="#home" class="nav-choosen">Home</a>
+                <a href="#destinations" class="nav-choice">Destinations</a>
+                <a href="#about" class="nav-choice">About</a>
+                <a href="#partner" class="nav-choice">Partner</a>
+            <ul class="auth-buttons">
+                <a href="#login" class="log-link">login</a>
+                <a href="#register" class="reg-link">register</a>
             </ul>
-            <div class="auth-buttons">
-                <button class="login-btn">Login</button>
-                <button class="register-btn">Register</button>
             </div>
         </nav>
     </header>
@@ -67,7 +67,7 @@
                 <div class="new-way-text">
                     <h2>A new way to explore the world</h2>
                     <p>For decades travellers have reached for Lonely Planet books when looking to plan and execute their perfect trip, but now they can also let Lonely Planet Experiences lead the way.</p>
-                    <button class="learn-more-btn">Learn more</button>
+                    <a href="#learn_more"class=learn-more-btn>Learn more</a>
                 </div>
             </div>
         </section>
@@ -75,7 +75,9 @@
         <section class="featured-destinations">
             <div class="destinations-header">
                 <h2>Featured destinations</h2>
-                <a href="#" class="view-all">View all →</a>
+                <a href="#" class="view-all">View all
+                <img src="assets/view_all_arrow.svg" alt="">
+                </a>
             </div>
             <div class="destinations-grid">
                 <div class="destination-card">
@@ -113,19 +115,24 @@
 
     <footer class="footer">
         <div class="footer-content">
-            <div class="footer-logo">
-                <img src="assets/logo.svg">
+            <div class="footer-up">
+                <div class="footer-logo">
+                    <img src="assets/logo.svg" alt="Logo">
+                </div>
+                <div class="footer-copy">
+                    <p>©2020 Thousand Sunny. All rights reserved.</p>
+                </div>
             </div>
-            <div class="footer-social">
-                <img src="assets/twitter_logo.svg" alt="">
-                <img src="assets/facebook_logo.svg" alt="">
-                <img src="assets/instagram_logo.svg" alt="">
-                <img src="assets/linkedin_logo.svg" alt="">
-                <img src="assets/youtube_logo.svg" alt="">
-            </div>
-            <div class="footer-copyright">
-                <p>©2020 Thousand Sunny. All rights reserved.</p>
-            </div>
+        </div>
+
+        <hr class="footer-line">
+
+        <div class="footer-social">
+            <a href="https://x.com"><img src="assets/twitter_logo.svg" alt="twitter"></a>
+            <a href="https://facebook.com"><img src="assets/facebook_logo.svg" alt="facebook"></a>
+            <a href="https://instagram.com"><img src="assets/instagram_logo.svg" alt="instagram"></a>
+            <a href="https://linkedin.com"><img src="assets/linkedin_logo.svg" alt="linkedin"></a>
+            <a href="https://youtube.com"><img src="assets/youtube_logo.svg" alt="youtube"></a>
         </div>
     </footer>
 </body>
