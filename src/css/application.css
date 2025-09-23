@@ -50,19 +50,26 @@
     color: #333;
   }
 
-  .nav-links,
-  .auth-buttons {
-    display: none;
+  .nav-links{
+    position: fixed;
+    z-index: 9999;
+    background-color: bisque;
+    padding: 15px;
+    top: 50px;
     flex-direction: column;
     align-items: flex-start;
     gap: 1rem;
     margin-top: 1rem;
     width: 100%;
+    text-align: center;
+    left: -200%;
+    transition: left 0.3 ease;
   }
 
   #menu-toggle:checked ~ .nav-links,
   #menu-toggle:checked ~ .auth-buttons {
     display: flex;
+    left: 0;
   }
 
   .nav {
@@ -71,6 +78,10 @@
 
   .hero {
     padding: 2rem 1rem;
+  }
+
+  .hero-text{
+    order: 1;
   }
 
   .hero-content {
@@ -116,6 +127,10 @@
     max-width: 100%;
     margin: 1rem auto;
     display: block;
+  }
+
+  .destinations-grid {
+    grid-template-columns: 1fr;
   }
 
   .destination-card img {
