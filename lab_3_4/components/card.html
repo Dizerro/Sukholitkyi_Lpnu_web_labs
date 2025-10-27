@@ -1,0 +1,20 @@
+<article class="card">
+    <div class="card__image">
+        <img src="{{image_url}}" alt="">
+    </div>
+    <div class="card__content">
+        <h3 class="card__title">{{title}}</h3>
+        <p class="card__subtitle">{{country}}</p>
+        <p class="card__duration">{{duration}} days</p>
+        <p class="card__description">
+            {{description}}
+        </p>
+        <div class="card__details">
+            <span class="card__price">Price: {{price}} €</span>
+        </div>
+        <div class="card__actions">
+            <button type="button" class="btn btn--primary js-edit-btn" data-tour-id="{{id}}">Edit</button>
+            <button type="button" class="btn btn--secondary js-remove-btn" data-tour-id="{{id}}">Remove</button>
+        </div>
+    </div>
+</article>

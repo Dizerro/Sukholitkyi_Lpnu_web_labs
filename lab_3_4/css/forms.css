@@ -1,0 +1,143 @@
+.search {
+    margin-left: auto;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.input {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    width: 200px;
+    transition: border-color 0.2s ease;
+}
+
+.input:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+.btn {
+    padding: 8px 16px;
+    border: 1px solid;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.btn--primary {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+}
+
+.btn--primary:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+}
+
+.btn--primary:focus {
+    outline: 2px solid #007bff;
+    outline-offset: 2px;
+}
+
+.btn--secondary {
+    background-color: white;
+    color: #dc3545;
+    border-color: #dc3545;
+}
+
+.btn--secondary:hover {
+    background-color: #dc3545;
+    color: white;
+}
+
+.btn--secondary:focus {
+    outline: 2px solid #dc3545;
+    outline-offset: 2px;
+}
+
+.btn--wide {
+    width: 100%;
+}
+
+.btn--large {
+    padding: 12px 24px;
+    font-size: 16px;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-label {
+    font-size: 14px;
+    font-weight: 500;
+    color: #333;
+}
+
+.form-input,
+.form-textarea,
+.form-select {
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    transition: border-color 0.2s ease;
+}
+
+.form-input:focus,
+.form-textarea:focus,
+.form-select:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+.form-input--number {
+    width: 120px;
+}
+
+.form-textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+.form-select {
+    background-color: white;
+    cursor: pointer;
+}
+
+.form-submit {
+    margin-top: 20px;
+}
+
+@media (max-width: 768px) {
+    .search {
+        margin-left: 0;
+        width: 100%;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .input {
+        width: 100%;
+    }
+
+    .btn {
+        width: 100%;
+    }
+}

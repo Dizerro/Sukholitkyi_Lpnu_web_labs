@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Tour - Hot Tours</title>
+    <link rel="stylesheet" href="../css/application.css">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <ul class="nav__list">
+                <li>
+                    <a href="index.html" class="nav__item">Hot Tours</a>
+                </li>
+                <li>
+                    <a href="index.html" class="nav__item">My Tours</a>
+                </li>
+                <li>
+                    <a href="create.html" class="nav__item nav__item--active">Add Tour</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="form-container">
+        <h1 class="form-title">Create tour</h1>
+
+        <form class="form" id="create-form">
+            <div class="form-group">
+                <label for="title" class="form-label">Title</label>
+                <input type="text" id="title" name="title" class="form-input" placeholder="Enter tour title..." required>
+            </div>
+
+            <div class="form-group">
+                <label for="country" class="form-label">Country</label>
+                <input type="text" id="country" name="country" class="form-input" placeholder="Enter country name..." required>
+            </div>
+
+            <div class="form-group">
+                <label for="duration" class="form-label">Duration</label>
+                <input type="text" id="duration" name="duration" class="form-input" placeholder="Enter duration..." required>
+            </div>
+
+            <div class="form-group">
+                <label for="description" class="form-label">Description</label>
+                <textarea id="description" name="description" class="form-textarea" rows="4" placeholder="Enter tour description..."></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="price" class="form-label">Price (€)</label>
+                <input type="number" id="price" name="price" class="form-input form-input--number" value="0.00" min="0" step="0.01" required>
+            </div>
+
+            <button type="submit" class="btn btn--primary btn--wide btn--large form-submit">Add tour</button>
+        </form>
+
+        <br>
+
+        <div class="alert alert--error" id="js-error-alert" style="display: none;">
+            <span class="alert__text" id="js-error-text">Oh snap! Change a few things up and try submitting again.</span>
+            <a href="#" type="button" class="alert__close" id="close-alert">×</a>
+        </div>
+    </div>
+
+    <script type="module" src="../js/core/app.js"></script>
+    <script type="module" src="../js/pages/create.js"></script>
+</body>
+</html>
