@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Hot Tours</title>
+    <link rel="stylesheet" href="../css/application.css">
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <ul class="nav__list">
+                <li>
+                    <a href="index.html" class="nav__item">Hot Tours</a>
+                </li>
+                <li>
+                    <a href="index.html" class="nav__item nav__item--active">My Tours</a>
+                </li>
+                <li>
+                    <a href="create.html" class="nav__item">Add Tour</a>
+                </li>
+            </ul>
+
+            <div class="search">
+                <input type="search" id="js-search-input" class="input" placeholder="Search tours...">
+                <button type="button" id="js-search-btn" class="btn btn--primary">Search</button>
+                <button type="button" id="js-clear-btn" class="btn btn--secondary">Clear</button>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <aside class="sidebar">
+            <h2>Manage tours</h2>
+
+            <div>
+                <label for="js-sort-select">Sort by:</label>
+                <select id="js-sort-select" class="input">
+                    <option value="title">Title</option>
+                    <option value="price">Price</option>
+                    <option value="duration">Duration</option>
+                </select>
+            </div>
+
+            <div>
+                <button type="button" id="js-calculate-btn" class="btn btn--primary btn--wide btn--large">Calculate</button>
+
+                <div class="stats">
+                    <span>Total price:</span>
+                    <span id="js-total-price" class="stats__value">0.00 €</span>
+                </div>
+            </div>
+        </aside>
+
+        <main class="main">
+            <div class="grid" id="tours-grid"></div>
+        </main>
+    </div>
+    <script type="module" src="../js/core/app.js"></script>
+    <script type="module" src="../js/pages/index.js"></script>
+</body>
+</html>
