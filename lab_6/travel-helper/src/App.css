@@ -130,16 +130,16 @@ ul {
 
 /* Cards grid layout */
 .cards-section {
-  padding: 60px 80px;
+  padding: 60px 300px;
   background-color: #fff;
   text-align: center;
 }
 
-.cards-grid {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
+.cards-grid-home {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   gap: 30px;
+  justify-items: center;
   margin-bottom: 40px;
 }
 
@@ -222,7 +222,7 @@ ul {
   margin: 0 auto;
 }
 
-.catalog-grid {
+.catalog-grid-catalog{
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: 24px;
@@ -256,6 +256,43 @@ ul {
 .price {
   font-weight: 700;
   color: #3a3a3a;
+}
+
+.item-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.item-details {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  padding: 40px;
+}
+
+.item-image {
+  width: 400px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.item-info {
+  max-width: 500px;
+}
+
+.item-info h2 {
+  margin-bottom: 10px;
+}
+
+.item-description {
+  margin: 20px 0;
+  line-height: 1.5;
+}
+
+.button-container {
+  margin-top: 20px;
 }
 
 /* === FOOTER === */
