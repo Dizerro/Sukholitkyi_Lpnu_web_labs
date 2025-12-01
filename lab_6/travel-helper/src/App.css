@@ -389,3 +389,25 @@ ul {
   .hero-inner { padding: 0 12px; }
   .catalog { padding: 32px 12px; }
 }
+
+.loader {
+  margin: 40px auto;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: block;
+  position: relative;
+  border: 3px solid #333;
+  border-color: #333 transparent #333 transparent;
+  animation: rotation 1s linear infinite;
+}
+
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

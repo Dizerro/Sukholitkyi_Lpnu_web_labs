@@ -1,12 +1,21 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import PrimaryButton from "../components/PrimaryButton";
-import { toursData } from "../toursData";
+import Loader from "../components/Loader";
+import { getTours } from "../api/toursApi";
 
 function Home() {
-  const cards = toursData;
+  const [cards, setCards] = useState([]);
   const [visibleCount, setVisibleCount] = useState(3);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    setLoading(true);
+    getTours()
+      .then((res) => setCards(res.data))
+      .finally(() => setLoading(false));
+  }, []);
 
   const showMore = () => {
     setVisibleCount((prev) => Math.min(prev + 3, cards.length));
@@ -24,24 +33,30 @@ function Home() {
       </section>
 
       <section className="cards-section">
-        <div className="cards-grid-home">
-          {cards.slice(0, visibleCount).map((card) => (
-            <div className="card" key={card.id}>
-              <img src={card.image} alt={card.title} />
-              <h3>{card.title}</h3>
-              <p>{card.description}</p>
-            </div>
-          ))}
-        </div>
-
-        {visibleCount < cards.length ? (
-          <div className="button-container">
-            <PrimaryButton label="View more" onClick={showMore} />
-          </div>
+        {loading ? (
+          <Loader />
         ) : (
-          <div className="button-container">
-            <p>All destinations are shown!</p>
-          </div>
+          <>
+            <div className="cards-grid-home">
+              {cards.slice(0, visibleCount).map((card) => (
+                <div className="card" key={card.id}>
+                  <img src={card.image} alt={card.title} />
+                  <h3>{card.title}</h3>
+                  <p>{card.description}</p>
+                </div>
+              ))}
+            </div>
+
+            {visibleCount < cards.length ? (
+              <div className="button-container">
+                <PrimaryButton label="View more" onClick={showMore} />
+              </div>
+            ) : (
+              <div className="button-container">
+                <p>All destinations are shown!</p>
+              </div>
+            )}
+          </>
         )}
       </section>
 

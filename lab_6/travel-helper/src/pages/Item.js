@@ -1,12 +1,25 @@
 import { useParams, Link } from "react-router-dom";
+import { useState, useEffect } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import PrimaryButton from "../components/PrimaryButton";
-import { toursData } from "../toursData";
+import Loader from "../components/Loader";
+import { getTourById } from "../api/toursApi";
 
 function Item() {
   const { id } = useParams();
-  const tour = toursData.find((t) => t.id === Number(id));
+  const [tour, setTour] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    setLoading(true);
+    getTourById(id)
+      .then((res) => setTour(res.data))
+      .catch(() => setTour(null))
+      .finally(() => setLoading(false));
+  }, [id]);
+
+  if (loading) return <Loader />;
 
   if (!tour) {
     return (
