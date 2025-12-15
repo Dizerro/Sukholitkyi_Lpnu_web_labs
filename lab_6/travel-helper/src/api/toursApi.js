@@ -1,12 +1,13 @@
-// src/api/toursApi.js
 import axios from "axios";
 
-const API = "http://localhost:5050/tours";
+const api = axios.create({
+  baseURL: "http://localhost:5050/tours",
+});
 
 export const getTours = (params = {}) => {
-  return axios.get(API, { params });
+  return api.get("/", { params });
 };
 
 export const getTourById = (id) => {
-  return axios.get(`${API}/${id}`);
+  return api.get(`/${id}`);
 };

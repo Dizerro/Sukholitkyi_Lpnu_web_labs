@@ -5,18 +5,26 @@ import Footer from "../components/Footer";
 import PrimaryButton from "../components/PrimaryButton";
 import Loader from "../components/Loader";
 import { getTourById } from "../api/toursApi";
+import { toast } from "react-toastify";
+
+import { useDispatch } from "react-redux";
+import { addToCart } from "../redux/actions";
 
 function Item() {
   const { id } = useParams();
   const [tour, setTour] = useState(null);
   const [loading, setLoading] = useState(false);
 
+  const dispatch = useDispatch();
+
   useEffect(() => {
     setLoading(true);
     getTourById(id)
       .then((res) => setTour(res.data))
       .catch(() => setTour(null))
-      .finally(() => setLoading(false));
+      .finally(() => {
+        setTimeout(() => setLoading(false), 200);
+      });
   }, [id]);
 
   if (loading) return <Loader />;
@@ -34,6 +42,11 @@ function Item() {
     );
   }
 
+  const handleAddToCart = () => {
+    dispatch(addToCart(tour));
+    toast.success("Tour added to cart!");
+  };
+
   return (
     <div className="item-page">
       <Header />
@@ -48,6 +61,9 @@ function Item() {
           <p className="item-description">{tour.description}</p>
 
           <div className="button-container">
+
+            <PrimaryButton label="Add to Cart" onClick={handleAddToCart} />
+
             <Link to="/catalog">
               <PrimaryButton label="Back to Catalog" />
             </Link>

@@ -17,31 +17,43 @@ exports.create = (req, res) => {
 
 exports.findAll = async (req, res) => {
   try {
-    const { search, orderBy, order } = req.query;
+    const { search, priceMin, priceMax, durationMin, durationMax, country } = req.query;
 
     const where = {};
+    const Op = db.Sequelize.Op;
+
     if (search) {
-      where[db.Sequelize.Op.or] = [
-        { title: { [db.Sequelize.Op.like]: `%${search}%` } },
-        { description: { [db.Sequelize.Op.like]: `%${search}%` } },
-        { country: { [db.Sequelize.Op.like]: `%${search}%` } },
+      where[Op.or] = [
+        { title: { [Op.like]: `%${search}%` } },
+        { description: { [Op.like]: `%${search}%` } },
+        { country: { [Op.like]: `%${search}%` } },
       ];
     }
 
-    const options = { where };
-
-    if (orderBy) {
-      options.order = [[orderBy, order?.toUpperCase() === 'DESC' ? 'DESC' : 'ASC']];
+    if (priceMin || priceMax) {
+      where.price = {};
+      if (priceMin) where.price[Op.gte] = Number(priceMin);
+      if (priceMax) where.price[Op.lte] = Number(priceMax);
     }
 
-    const data = await Tour.findAll(options);
-    res.send(data);
+    if (durationMin || durationMax) {
+      where.duration = {};
+      if (durationMin) where.duration[Op.gte] = Number(durationMin);
+      if (durationMax) where.duration[Op.lte] = Number(durationMax);
+    }
+
+    if (country && country !== "all") {
+      where.country = country;
+    }
+
+    const tours = await Tour.findAll({ where });
+    res.send(tours);
+
   } catch (err) {
-    res.status(500).send({
-      message: err.message || "Some error occurred while retrieving tours.",
-    });
+    res.status(500).send({ message: err.message || "Error retrieving tours." });
   }
 };
+
 
 exports.findOne = (req, res) => {
     const id = req.params.id;
