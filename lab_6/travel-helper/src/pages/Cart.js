@@ -2,7 +2,7 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Loader from "../components/Loader";
 import PrimaryButton from "../components/PrimaryButton";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { useSelector, useDispatch } from "react-redux";
 import { increaseQty, decreaseQty, removeFromCart } from "../redux/actions";
@@ -10,6 +10,7 @@ import { increaseQty, decreaseQty, removeFromCart } from "../redux/actions";
 function Cart() {
   const cart = useSelector((state) => state.cart);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const total = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
   const loading = false;
@@ -43,7 +44,6 @@ function Cart() {
                     <p>{item.country}</p>
                     <p>${item.price}</p>
 
-                    {/* SHOW TYPE HERE */}
                     <p className="tour-type-tag">
                       Type: <strong>{item.tourType}</strong>
                     </p>
@@ -88,8 +88,15 @@ function Cart() {
               ))}
             </div>
 
-            <div className="cart-total">
-              <h3>Total: ${total.toFixed(2)}</h3>
+            <div className="cart-total-actions">
+              <div className="cart-total">
+                <h3>Total: ${total.toFixed(2)}</h3>
+              </div>
+
+              <PrimaryButton
+                label="Checkout"
+                onClick={() => navigate("/checkout")}
+              />
             </div>
           </>
         )}
