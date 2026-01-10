@@ -20,8 +20,8 @@ const CheckoutSchema = Yup.object({
 
   email: Yup.string()
     .matches(
-      /^[^\s@]+@[^\s@]{2,}\.[^\s@]+$/,
-      "Email domain must contain at least 2 characters"
+      /^[^\s@]+@[^\s@]{2,}\.[^\s@]{2,}$/,
+      "Email domain and zone must contain at least 2 characters"
     )
     .required("Email is a required field"),
 
@@ -33,6 +33,14 @@ const CheckoutSchema = Yup.object({
     .min(5, "Address is too short")
     .required("Address is a required field"),
 });
+
+const demoData = {
+  firstName: "Zakhar",
+  lastName: "Sukholitkyi",
+  email: "zak@gg.com",
+  phone: 380991234567,
+  address: "Lviv, Zdorovya 3",
+};
 
 function Checkout() {
   const dispatch = useDispatch();
@@ -60,8 +68,17 @@ function Checkout() {
             navigate("/success");
           }}
         >
-          {({ errors, touched }) => (
+          {({ errors, touched, setValues }) => (
             <Form className="checkout-form">
+
+              <button
+                type="button"
+                className="demo-btn"
+                onClick={() => setValues(demoData)}
+              >
+                Fill demo data
+              </button>
+
               <div className="form-group">
                 <Field name="firstName" placeholder="First name" />
                 <FormError error={errors.firstName} touched={touched.firstName} />

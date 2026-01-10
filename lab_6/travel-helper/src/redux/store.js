@@ -1,34 +1,39 @@
 import { createStore } from "redux";
 import cartReducer from "./reducers";
 
-const loadState = () => {
+const makeStorageKey = (userEmail) => `cartState_${userEmail}`;
+
+const loadStateForUser = (userEmail) => {
   try {
-    const serialized = localStorage.getItem("cartState");
-    if (serialized === null) return undefined;
+    if (!userEmail) return undefined;
+    const serialized = localStorage.getItem(makeStorageKey(userEmail));
+    if (!serialized) return undefined;
     return JSON.parse(serialized);
-  } catch (err) {
+  } catch {
     return undefined;
   }
 };
 
-const saveState = (state) => {
+const saveStateForUser = (userEmail, state) => {
   try {
-    const serialized = JSON.stringify(state);
-    localStorage.setItem("cartState", serialized);
+    if (!userEmail) return;
+    localStorage.setItem(makeStorageKey(userEmail), JSON.stringify(state));
   } catch (err) {
     console.error("Could not save state", err);
   }
 };
 
-const persistedState = loadState();
-
 const devTools =
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__();
 
-const store = createStore(cartReducer, persistedState, devTools);
+export const createAppStore = (userEmail) => {
+  const persistedState = loadStateForUser(userEmail);
 
-store.subscribe(() => {
-  saveState(store.getState());
-});
+  const store = createStore(cartReducer, persistedState, devTools);
 
-export default store;
+  store.subscribe(() => {
+    saveStateForUser(userEmail, store.getState());
+  });
+
+  return store;
+};

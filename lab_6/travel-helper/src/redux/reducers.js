@@ -6,11 +6,32 @@ import {
   CLEAR_CART,
 } from "./actions";
 
+/* ===== helpers (local to reducer) ===== */
+const getCartKey = () => {
+  const user = localStorage.getItem("user");
+  return user ? `cart_${user}` : null;
+};
+
+const loadCart = () => {
+  const key = getCartKey();
+  if (!key) return [];
+  return JSON.parse(localStorage.getItem(key)) || [];
+};
+
+const saveCart = (cart) => {
+  const key = getCartKey();
+  if (!key) return;
+  localStorage.setItem(key, JSON.stringify(cart));
+};
+/* ===================================== */
+
 const initialState = {
-  cart: [],
+  cart: loadCart(),
 };
 
 function cartReducer(state = initialState, action) {
+  let updatedCart;
+
   switch (action.type) {
     case ADD_TO_CART: {
       const newItem = action.payload;
@@ -21,65 +42,56 @@ function cartReducer(state = initialState, action) {
           item.tourType === newItem.tourType
       );
 
-      if (exists) {
-        return {
-          ...state,
-          cart: state.cart.map((item) =>
+      updatedCart = exists
+        ? state.cart.map((item) =>
             item.id === newItem.id && item.tourType === newItem.tourType
               ? { ...item, qty: item.qty + 1 }
               : item
-          ),
-        };
-      }
+          )
+        : [...state.cart, { ...newItem, qty: 1 }];
 
-      return {
-        ...state,
-        cart: [...state.cart, { ...newItem, qty: 1 }],
-      };
+      saveCart(updatedCart);
+      return { ...state, cart: updatedCart };
     }
 
     case REMOVE_FROM_CART:
-      return {
-        ...state,
-        cart: state.cart.filter(
-          (item) =>
-            !(
-              item.id === action.payload.id &&
-              item.tourType === action.payload.tourType
-            )
-        ),
-      };
+      updatedCart = state.cart.filter(
+        (item) =>
+          !(
+            item.id === action.payload.id &&
+            item.tourType === action.payload.tourType
+          )
+      );
+      saveCart(updatedCart);
+      return { ...state, cart: updatedCart };
 
     case INCREASE_QTY:
-      return {
-        ...state,
-        cart: state.cart.map((item) =>
-          item.id === action.payload.id &&
-          item.tourType === action.payload.tourType
-            ? { ...item, qty: item.qty + 1 }
-            : item
-        ),
-      };
+      updatedCart = state.cart.map((item) =>
+        item.id === action.payload.id &&
+        item.tourType === action.payload.tourType
+          ? { ...item, qty: item.qty + 1 }
+          : item
+      );
+      saveCart(updatedCart);
+      return { ...state, cart: updatedCart };
 
     case DECREASE_QTY:
-      return {
-        ...state,
-        cart: state.cart
-          .map((item) =>
-            item.id === action.payload.id &&
-            item.tourType === action.payload.tourType &&
-            item.qty > 1
-              ? { ...item, qty: item.qty - 1 }
-              : item
-          )
-          .filter((item) => item.qty > 0),
-      };
+      updatedCart = state.cart
+        .map((item) =>
+          item.id === action.payload.id &&
+          item.tourType === action.payload.tourType &&
+          item.qty > 1
+            ? { ...item, qty: item.qty - 1 }
+            : item
+        )
+        .filter((item) => item.qty > 0);
+
+      saveCart(updatedCart);
+      return { ...state, cart: updatedCart };
 
     case CLEAR_CART:
-      return {
-        ...state,
-        cart: [],
-      };
+      saveCart([]);
+      return { ...state, cart: [] };
 
     default:
       return state;
